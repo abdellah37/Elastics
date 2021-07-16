@@ -1,0 +1,100 @@
+client.indices.create ({ 
+  index : 'users' , 
+  
+  body : {
+    
+    "mappings": {
+      "properties": {
+        "age":    { "type": "integer" },  
+        "email":  { "type": "keyword"  }, 
+        "name":   { "type": "text"  }     
+      }
+    },
+    "settings": {
+      "index": {
+        "number_of_shards": 5,  
+        "number_of_replicas": 2 
+      }
+    }
+
+
+
+ }
+
+
+
+})
+
+
+client.indices.create ({ 
+  index : 'rab7insbet' , 
+  
+  body : {
+    
+        "mappings": {
+          
+            "properties": {
+              "fields": {
+                "properties": {
+                  "actor": {
+                    "type": "text",
+                    "fields": {"raw": {"type": "keyword"}}
+                  },
+                  "directors": {
+                    "type": "text",
+                    "fields": {"raw": {"type": "keyword"}}
+                  },
+                  "genres": {
+                    "type": "text",
+                    "fields": {"raw": {"type": "keyword"}}
+                  },
+                  "image_url": {
+                    "type": "text",
+                    "fields": {"raw": {"type": "keyword"}}
+                  },
+                  "plot": {
+                    "type": "text",
+                    "fields": {"keyword": {"type": "keyword","ignore_above": 256}}
+                  },
+                  "rank": {
+                    "type": "long"
+                  },
+                  "rating": {
+                    "type": "float"
+                  },
+                  "release_date": {
+                    "type": "date"
+                  },
+                  "running_time_secs": {
+                    "type": "long"
+                  },
+                  "title": {
+                    "type": "text",
+                    "fields": {"keyword": {"type": "keyword","ignore_above": 256}
+                    }
+                 },
+                  "year": {
+                    "type": "long"
+                  }
+                }
+              }
+              
+          }
+        },
+        "settings": {
+          "index": {
+            
+            "number_of_shards": "5",
+            "number_of_replicas": "1",
+          
+          }
+        
+      }
+    
+
+ }
+
+
+})
+
+

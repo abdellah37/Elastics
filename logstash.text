@@ -1,0 +1,7 @@
+- pipeline.id: my-pipeline_1
+  path.config: "C:\\logstash-7.13.2\\bin\\logstash.conf"
+  pipeline.workers: 1
+- pipeline.id: my-other-pipeline
+  path.config: "C:\\logstash-7.13.2\\bin\\File2.conf"
+  pipeline.workers: 1
+

@@ -1,0 +1,147 @@
+je vais faire un mapping 
+elasticsearch\bin\elasticsearch
+
+creer un index et faire son mapping :
+curl -X PUT "localhost:9200/game-of-thrones?pretty" -H 'Content-Type: application/json' -d'
+{
+  "mappings": {
+    "properties": {
+      "character":    { "type": "text" },  
+      "quote":  { "type": "text"  }
+    }
+  }
+}
+'
+
+creer un index:
+curl -X PUT localhost:9200/game-of-thrones
+
+delete un index :
+curl -X DELETE "localhost:9200/game-of-thrones?pretty"
+
+get a mapping :
+curl -X GET "localhost:9200/test2001/_mapping?pretty"
+
+create an index with mapping 
+
+client.indices.create ({ 
+  index : 'test2001' , 
+  
+  body : {
+    
+    "mappings": {
+      "properties": {
+        "age":    { "type": "integer" },  
+        "email":  { "type": "keyword"  }, 
+        "name":   { "type": "text"  }     
+      }
+    }
+
+ } })
+
+
+situation des shards:
+curl -XGET localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason| grep UNASSIGNED
+
+
+curl localhost:9200/_cluster/health?pretty
+
+curl -XPUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+{
+  "transient": {
+    "cluster.routing.allocation.disk.watermark.low": "90%"
+  }
+}'
+
+
+
+client.indices.create ({ 
+  index : 'logs' , 
+  
+  body : {
+    
+        "mappings": {
+          
+            
+              
+                "properties": {
+                  "id":{
+                        "type":"long"
+                  }
+                  ,
+                  "profileId" : {
+                    "type":"long"
+                  },
+                 
+                  "actionType": {
+                    "type": "text",
+                  
+                  },
+                 
+                  "field": {
+                    "type": "text",
+                    
+                  },
+                  "on": {
+                    "type": "text",
+                    
+                  },
+                  "date": {
+                    "type": "date"
+                  },
+                 
+                  
+                }
+              
+              
+          
+        },
+        "settings": {
+          "index": {
+            
+            "number_of_shards": "3",
+            "number_of_replicas": "1",
+
+          }
+        
+      }
+    
+
+ }
+
+
+})
+
+
+logstash 
+input {
+ jdbc {
+        jdbc_connection_string => "jdbc:postgresql://localhost:5432/test"
+        jdbc_user => "postgres"
+        jdbc_validate_connection => true
+        jdbc_driver_library => "/path/to/postgresql-9.4-1201.jdbc41.jar"
+        jdbc_driver_class => "org.postgresql.Driver"
+        statement => "SELECT * from test "
+    }
+stdin{}
+}
+
+filter {
+# Add filter here. This sample has a blank filter.
+}
+
+output {
+
+    elasticsearch {
+        protocol => http
+        index => "test"
+        document_id => "%{uid}"
+        host =>  ["localhost:9200"]
+stdout {
+codec => "rubydebug"
+}
+    }
+    }
+
+
+      "fields": {"raw": {"type": "keyword"}}
