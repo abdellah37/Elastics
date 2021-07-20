@@ -7,17 +7,17 @@ var client = new elasticsearch.Client({
 
 module.exports = {
 
-async fetch(email,name)  {
+async fetch(query)  {
   try {
     const response = await client.search({
-      q: name
+      q: query
     });
-    console.log(response.hits.hits)
+    console.log(response.hits.hits) 
   } catch (error) {
     console.trace(error.message)
   }
   return client.search({
-    q: name
+    q: query
   });
 }
 }

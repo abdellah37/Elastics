@@ -9,15 +9,12 @@ var client = new elasticsearch.Client({
 module.exports = {
 
  async  fetch(req,res){
-    const name = req.body.name;
-    const email = req.body.email;
+    const query = req.body.query;
 
-    
-    
     try {
-      console.log(name)
-      console.log(email)
-      const result = await Services.fetch(email,name);
+      console.log(query)
+      
+      const result = await Services.fetch(query);
       console.log(result);
       const data = result.hits.hits.map((te)=>{
         return {
