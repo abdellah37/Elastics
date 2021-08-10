@@ -145,3 +145,105 @@ codec => "rubydebug"
 
 
       "fields": {"raw": {"type": "keyword"}}
+
+
+
+
+
+      'use strict'
+const express = require('express');
+const app = express();
+const { Client } = require('@elastic/elasticsearch');
+var elasticsearch = require('elasticsearch');
+console.log("node", process.env.ELASTIC_HOST)
+var client = new Client({
+  node: process.env.ELASTIC_HOST
+});
+
+
+
+
+
+/*async function run () {
+  // Let's start by indexing some data
+  await client.index({
+    index: 'game-of-thrones',
+    // type: '_doc', // uncomment this line if you are using {es} ≤ 6
+    body: {
+      character: 'Ned Stark',
+      quote: 'Winter is coming.'
+    }
+  })
+
+
+
+  await client.index({
+    index: 'game-of-thrones',
+    // type: '_doc', // uncomment this line if you are using {es} ≤ 6
+    body: {
+      character: 'Daenerys Targaryen',
+      quote: 'I am the blood of the dragon.'
+    }
+  })
+
+  await client.index({
+    index: 'game-of-thrones',
+    // type: '_doc', // uncomment this line if you are using {es} ≤ 6
+    body: {
+      character: 'Tyrion Lannister',
+      quote: 'A mind needs books like a sword needs a whetstone.'
+    }
+  })
+
+  // We need to force an index refresh at this point, otherwise we will not
+  // get any result in the consequent search
+  await client.indices.refresh({ index: 'game-of-thrones' })
+
+  // Let's search!
+  const { body } = await client.search({
+    index: 'game-of-thrones',
+    // type: '_doc', // uncomment this line if you are using {es} ≤ 6
+    body: {
+      query: {
+        match: { quote: 'winter' }
+      }
+    }
+  })
+
+  console.log(body.hits.hits)
+}
+
+run().catch(console.log)*/
+
+
+
+
+/*client.ping({
+  // ping usually has a 3000ms timeout
+  requestTimeout: 1000
+}, function (error) {
+  if (error) {
+    console.trace('elasticsearch cluster is down!');
+  } else {
+    console.log('All is well');
+  }
+});
+async function khdmi (){
+try {
+  const response = await client.search({
+    q: 'ziko'
+  });
+  console.log(response.hits.hits)
+} catch (error) {
+  console.trace(error.message)
+}
+
+
+}
+
+khdmi();*/
+
+/*var elasticsearch =require('es7')
+var client = new elasticsearch.Client({
+        host: 'localhost:9200'
+});*/

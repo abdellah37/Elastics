@@ -3,14 +3,14 @@ const Services = require('./services');
 const { Client } = require('@elastic/elasticsearch');
 var elasticsearch=require('elasticsearch');
 var client = new elasticsearch.Client({
-  host: 'localhost:9200'
+  node: process.env.ELASTIC_HOST
 });
 
 module.exports = {
 
- async  fetch(req,res){
-    const query = req.body.query;
-
+ async  fetch(req,res){      // ce controller est responsable de la réception des requêtes 
+    const query = req.body.query;     //envoyer par la partie frontend et de chercher dans le cluster et de renvoyer
+                                        //la réponse vers la partie frontend 
     try {
       console.log(query)
       

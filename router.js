@@ -3,11 +3,7 @@ const controller = require("./controller");
 const router     = express.Router();
 
 
-
-
 router.get('/' ,controller.fetch);
-
-
 
 
 module.exports = router;
